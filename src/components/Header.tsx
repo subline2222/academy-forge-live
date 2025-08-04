@@ -13,9 +13,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "Ana Sayfa", href: "#" },
-    { name: "Eğitim Kategorileri", href: "#kategoriler", hasDropdown: true },
-    { name: "Tüm Eğitimler", href: "#egitimler" },
+    { name: "Ana Sayfa", href: "/" },
+    { name: "Kategoriler", href: "/kategoriler" },
+    { name: "Seminerler", href: "/seminerler" },
     { name: "Hakkımızda", href: "#hakkimizda" },
     { name: "İletişim", href: "#iletisim" },
   ];
@@ -66,7 +66,6 @@ const Header = () => {
                 className="flex items-center gap-1 text-foreground hover:text-primary transition-colors duration-200 font-medium"
               >
                 {item.name}
-                {item.hasDropdown && <ChevronDown className="w-4 h-4" />}
               </a>
             ))}
           </nav>

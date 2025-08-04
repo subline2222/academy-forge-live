@@ -1,8 +1,20 @@
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ArrowRight, Star, Users, Award } from "lucide-react";
-import heroImage from "@/assets/hero-academy.jpg";
+import Autoplay from "embla-carousel-autoplay";
+import hero1 from "@/assets/hero-1.jpg";
+import hero2 from "@/assets/hero-2.jpg";
+import hero3 from "@/assets/hero-3.jpg";
+import heroAcademy from "@/assets/hero-academy.jpg";
 
 const Hero = () => {
+  const heroImages = [
+    { src: hero1, alt: "Profesyonel İş Danışmanlığı" },
+    { src: hero2, alt: "Strateji Geliştirme Seminerleri" },
+    { src: hero3, alt: "Dijital Pazarlama Eğitimleri" },
+    { src: heroAcademy, alt: "Akademi Danışmanlık" }
+  ];
+
   const stats = [
     { icon: Users, label: "Mutlu Müşteri", value: "1000+" },
     { icon: Award, label: "Başarılı Proje", value: "500+" },
@@ -11,13 +23,28 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image Carousel */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={heroImage} 
-          alt="Akademi Danışmanlık Hero" 
-          className="w-full h-full object-cover"
-        />
+        <Carousel 
+          className="w-full h-full"
+          plugins={[
+            Autoplay({
+              delay: 5000,
+            }),
+          ]}
+        >
+          <CarouselContent>
+            {heroImages.map((image, index) => (
+              <CarouselItem key={index}>
+                <img 
+                  src={image.src} 
+                  alt={image.alt} 
+                  className="w-full h-full object-cover"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-transparent"></div>
       </div>
 
