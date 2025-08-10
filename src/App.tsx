@@ -8,6 +8,9 @@ import Categories from "./pages/Categories";
 import CategoryDetail from "./pages/CategoryDetail";
 import Seminars from "./pages/Seminars";
 import NotFound from "./pages/NotFound";
+import Panel from "./pages/Panel";
+import Course from "./pages/Course";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +25,9 @@ const App = () => (
           <Route path="/kategoriler" element={<Categories />} />
           <Route path="/kategori/:slug" element={<CategoryDetail />} />
           <Route path="/seminerler" element={<Seminars />} />
+          <Route path="/panel" element={<Panel />} />
+          <Route path="/kurs/:slug" element={<Course />} />
+          <Route path="/admin" element={<Admin />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

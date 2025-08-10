@@ -16,8 +16,8 @@ const Header = () => {
     { name: "Ana Sayfa", href: "/" },
     { name: "Kategoriler", href: "/kategoriler" },
     { name: "Seminerler", href: "/seminerler" },
-    { name: "Hakkımızda", href: "#hakkimizda" },
-    { name: "İletişim", href: "#iletisim" },
+    { name: "Eğitim Merkezi", href: "/panel" },
+    { name: "Admin", href: "/admin" },
   ];
 
   return (
