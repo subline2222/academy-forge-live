@@ -1,23 +1,46 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, Users, Star, Play, Download, Award } from "lucide-react";
-
+import { getCategoryBySlug } from "@/data/categories";
 const CategoryDetail = () => {
   const { slug } = useParams();
 
-  // Mock data - would come from API based on slug
-  const category = {
-    name: "Dijital Pazarlama",
-    description: "Modern pazarlama stratejileri ve dijital araçlarla markanızı güçlendirin",
-    level: "Başlangıç",
-    totalCourses: 67,
-    totalStudents: 1250,
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop"
-  };
+  const baseCategory = getCategoryBySlug(slug ?? "");
+  useEffect(() => {
+    document.title = baseCategory
+      ? `${baseCategory.name} – Akademi Danışmanlık`
+      : "Kategori Bulunamadı – Akademi Danışmanlık";
+  }, [baseCategory]);
 
+  if (!baseCategory) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
+        <div className="container mx-auto px-4 py-16">
+          <Link to="/kategoriler">
+            <Button variant="ghost" size="sm" className="mb-6">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Kategorilere Dön
+            </Button>
+          </Link>
+          <h1 className="text-3xl font-bold mb-4">Kategori bulunamadı</h1>
+          <p className="text-muted-foreground">Aradığınız kategori mevcut değil.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const category = {
+    name: baseCategory.name,
+    description: `${baseCategory.name} alanında eğitimler ve danışmanlık`,
+    level: baseCategory.level,
+    totalCourses: baseCategory.count,
+    totalStudents: baseCategory.count * 20,
+    rating: baseCategory.rating,
+    image: baseCategory.image
+  };
   const courses = [
     {
       id: 1,
