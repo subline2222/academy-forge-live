@@ -11,6 +11,8 @@ export type Lesson = {
 export type Module = {
   id: string;
   title: string;
+  intro?: string; // Ara Yazı
+  richContent?: string; // Zengin İçerik (Markdown/plain)
   lessons: Lesson[];
 };
 
@@ -109,7 +111,7 @@ export const generateContent = (category: Category): CourseContent => {
         pdfUrl: "/docs/placeholder.pdf",
       });
     }
-    modules.push({ id: `${i + 1}`, title: `Modül ${i + 1}: ${category.name}`, lessons });
+    modules.push({ id: `${i + 1}`, title: `Modül ${i + 1}: ${category.name}`, intro: "", richContent: "", lessons });
   }
 
   const quiz: QuizQuestion[] = Array.from({ length: 5 }).map((_, k) => {

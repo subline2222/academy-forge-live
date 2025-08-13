@@ -3,6 +3,7 @@ import { type CourseContent, type Module, type Lesson, type QuizQuestion } from 
 import { type Category } from "@/data/categories";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Props {
   slug: string;
@@ -70,6 +71,37 @@ const CourseEditPanel = ({ slug, category, content, onChange, onSave, onDelete }
                   onChange(c);
                 }}
               />
+
+              <div className="grid gap-3 md:grid-cols-2 mb-3">
+                <div className="md:col-span-2">
+                  <label className="text-sm text-muted-foreground">Ara Yazı</label>
+                  <Textarea
+                    value={m.intro ?? ""}
+                    onChange={(e) => {
+                      const c = { ...content };
+                      c.modules[mi] = { ...c.modules[mi], intro: e.target.value };
+                      onChange(c);
+                    }}
+                    placeholder="Modül için kısa ara yazı"
+                    aria-label="Ara yazı"
+                  />
+                </div>
+                <div className="md:col-span-2">
+                  <label className="text-sm text-muted-foreground">Zengin İçerik</label>
+                  <Textarea
+                    value={m.richContent ?? ""}
+                    onChange={(e) => {
+                      const c = { ...content };
+                      c.modules[mi] = { ...c.modules[mi], richContent: e.target.value };
+                      onChange(c);
+                    }}
+                    placeholder="Zengin içerik (ör. Markdown)"
+                    aria-label="Zengin içerik"
+                    className="min-h-32"
+                  />
+                </div>
+              </div>
+
               <div className="space-y-2">
                 {m.lessons.map((l, li) => (
                   <div key={l.id} className="grid grid-cols-1 md:grid-cols-3 gap-2">
