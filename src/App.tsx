@@ -11,9 +11,10 @@ import NotFound from "./pages/NotFound";
 import Panel from "./pages/Panel";
 import Course from "./pages/Course";
 import Admin from "./pages/Admin";
-
+import AdminCourses from "./pages/AdminCourses";
+ 
 const queryClient = new QueryClient();
-
+ 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/panel" element={<Panel />} />
           <Route path="/kurs/:slug" element={<Course />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/egitim" element={<AdminCourses />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
@@ -35,5 +37,5 @@ const App = () => (
     </TooltipProvider>
   </QueryClientProvider>
 );
-
+ 
 export default App;
