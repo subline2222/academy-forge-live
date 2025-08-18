@@ -13,6 +13,8 @@ import Course from "./pages/Course";
 import Admin from "./pages/Admin";
 import AdminCourses from "./pages/AdminCourses";
 import CategoryEducation from "./pages/CategoryEducation";
+import CoursePreview from "./pages/CoursePreview";
+import CoursePurchase from "./pages/CoursePurchase";
  
 const queryClient = new QueryClient();
  
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/egitim" element={<AdminCourses />} />
           <Route path="/kategoriler/:slug/egitim" element={<CategoryEducation />} />
+          <Route path="/kurs/onizleme/:courseId" element={<CoursePreview />} />
+          <Route path="/satin-al/:courseId" element={<CoursePurchase />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

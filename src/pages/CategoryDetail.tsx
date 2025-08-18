@@ -1,12 +1,15 @@
-import { useParams, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Clock, Users, Star, Play, Download, Award } from "lucide-react";
+import { ArrowLeft, Clock, Users, Star, Play, Download, Award, Eye, ShoppingCart } from "lucide-react";
 import { getCategoryBySlug } from "@/data/categories";
+import { useToast } from "@/hooks/use-toast";
 const CategoryDetail = () => {
   const { slug } = useParams();
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const baseCategory = getCategoryBySlug(slug ?? "");
   useEffect(() => {
@@ -99,6 +102,14 @@ const CategoryDetail = () => {
       bestseller: false
     }
   ];
+
+  const handlePreview = useCallback((courseId: number) => {
+    navigate(`/kurs/onizleme/${courseId}`);
+  }, [navigate]);
+
+  const handlePurchase = useCallback((courseId: number) => {
+    navigate(`/satin-al/${courseId}`);
+  }, [navigate]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background">
@@ -233,10 +244,22 @@ const CategoryDetail = () => {
 
               <CardFooter className="p-6 pt-0">
                 <div className="flex gap-2 w-full">
-                  <Button variant="outline" size="sm" className="flex-1">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handlePreview(course.id)}
+                  >
+                    <Eye className="w-4 h-4 mr-2" />
                     Önizle
                   </Button>
-                  <Button variant="default" size="sm" className="flex-1">
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handlePurchase(course.id)}
+                  >
+                    <ShoppingCart className="w-4 h-4 mr-2" />
                     Satın Al
                   </Button>
                 </div>
