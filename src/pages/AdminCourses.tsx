@@ -6,8 +6,10 @@ import CourseAddPanel from "@/components/admin/CourseAddPanel";
 import DefaultMessage from "@/components/admin/DefaultMessage";
 import AdminLayout from "@/components/admin/AdminLayout";
 import AdminCourseSidebar from "@/components/admin/AdminCourseSidebar";
+import { useToast } from "@/hooks/use-toast";
 
 const AdminCourses = () => {
+  const { toast } = useToast();
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [showAddPanel, setShowAddPanel] = useState(false);
   const [content, setContent] = useState<CourseContent | undefined>(undefined);
@@ -35,17 +37,28 @@ const AdminCourses = () => {
     setShowAddPanel(true);
   }, []);
 
+  const handleAddSuccess = useCallback((slug: string) => {
+    setShowAddPanel(false);
+    handleSelectCourse(slug);
+  }, [handleSelectCourse]);
+
   const handleSave = useCallback(() => {
     if (!selectedSlug || !content) return;
     saveCustomContent(selectedSlug, content);
-    alert("Kaydedildi");
-  }, [selectedSlug, content]);
+    toast({
+      title: "Başarılı",
+      description: "Kurs içeriği başarıyla kaydedildi.",
+    });
+  }, [selectedSlug, content, toast]);
 
   const handleDelete = useCallback(() => {
     if (!selectedSlug) return;
     deleteCustomContent(selectedSlug);
-    alert("Özel içerik silindi");
-  }, [selectedSlug]);
+    toast({
+      title: "Başarılı",
+      description: "Özel içerik silindi, varsayılan içerik gösterilecek.",
+    });
+  }, [selectedSlug, toast]);
 
   const renderRightPanel = () => {
     if (selectedSlug && content && selectedCategory) {
@@ -62,7 +75,7 @@ const AdminCourses = () => {
     }
 
     if (showAddPanel) {
-      return <CourseAddPanel onCancel={() => setShowAddPanel(false)} />;
+      return <CourseAddPanel onCancel={() => setShowAddPanel(false)} onSuccess={handleAddSuccess} />;
     }
 
     return <DefaultMessage />;
