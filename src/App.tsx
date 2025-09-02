@@ -15,6 +15,9 @@ import AdminCourses from "./pages/admin/AdminCoursesPage";
 import CategoryEducation from "./pages/categories/CategoryEducationPage";
 import CoursePreview from "./pages/courses/CoursePreviewPage";
 import CoursePurchase from "./pages/courses/CoursePurchasePage";
+import CoursesIndexPage from "./pages/kurslar/page";
+import CourseDetailByCategoryPage from "./pages/kurslar/[kategori]/[egitim-adi]/page";
+import CourseTemplatePage from "./pages/kurslar/kurs-template/page";
  
 const queryClient = new QueryClient();
  
@@ -36,6 +39,12 @@ const App = () => (
           <Route path="/kategoriler/:slug/egitim" element={<CategoryEducation />} />
           <Route path="/kurs/onizleme/:courseId" element={<CoursePreview />} />
           <Route path="/satin-al/:courseId" element={<CoursePurchase />} />
+
+          {/* Kurslar (yeni klasör yapısı) */}
+          <Route path="/kurslar" element={<CoursesIndexPage />} />
+          <Route path="/kurslar/kurs-template" element={<CourseTemplatePage />} />
+          <Route path="/kurslar/:kategori/:egitimAdi" element={<CourseDetailByCategoryPage />} />
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
