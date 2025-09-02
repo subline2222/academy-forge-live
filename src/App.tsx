@@ -4,17 +4,17 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import Categories from "./pages/Categories";
-import CategoryDetail from "./pages/CategoryDetail";
+import Categories from "./pages/categories/CategoriesPage";
+import CategoryDetail from "./pages/categories/CategoryDetailPage";
 import Seminars from "./pages/Seminars";
 import NotFound from "./pages/NotFound";
 import Panel from "./pages/Panel";
-import Course from "./pages/Course";
-import Admin from "./pages/Admin";
-import AdminCourses from "./pages/AdminCourses";
-import CategoryEducation from "./pages/CategoryEducation";
-import CoursePreview from "./pages/CoursePreview";
-import CoursePurchase from "./pages/CoursePurchase";
+import Course from "./pages/courses/CoursePage";
+import Admin from "./pages/admin/AdminPage";
+import AdminCourses from "./pages/admin/AdminCoursesPage";
+import CategoryEducation from "./pages/categories/CategoryEducationPage";
+import CoursePreview from "./pages/courses/CoursePreviewPage";
+import CoursePurchase from "./pages/courses/CoursePurchasePage";
  
 const queryClient = new QueryClient();
  

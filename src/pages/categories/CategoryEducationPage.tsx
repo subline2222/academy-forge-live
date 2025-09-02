@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCategoryBySlug, type Category } from "@/data/categories";
+import { getCategoryBySlug } from "@/data/categories";
+import type { Category } from "@/data/types";
 import { getCourseContentForSlug, saveCustomContent, deleteCustomContent, type CourseContent } from "@/data/learning";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
